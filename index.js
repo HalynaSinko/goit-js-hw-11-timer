@@ -8,23 +8,25 @@ const refs = {
 
 
 class CountdownTimer {
-  constructor({ selector, targetDate, onTimerFace}) {
+  constructor({ selector, targetDate, onTimerFace }) {
     this.selector = selector;
     this.targetDate = targetDate;
     this.onTimerFace = onTimerFace;
   }
 
-  start() {
-    setInterval(() => {
-      const currentTime = Date.now();
-      const deltaTime = this.targetDate - currentTime;
-      // console.log(deltaTime);
-      const time = this.getTimeComponents(deltaTime);
-      this.onTimerFace(time);
-    }, 1000);
-
+  activationTimer() {
+    const currentTime = Date.now();
+    const deltaTime = this.targetDate - currentTime;
+    // console.log(deltaTime);
+    const time = this.getTimeComponents(deltaTime);
+    this.onTimerFace(time);
     // console.log(this.targetDate);
     // console.log(deltaTime);
+  };
+
+  start() {
+    this.activationTimer();
+    setInterval(() => {this.activationTimer()}, 1000);
   }
 
   /*
